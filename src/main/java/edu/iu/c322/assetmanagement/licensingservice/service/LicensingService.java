@@ -29,7 +29,7 @@ public class LicensingService {
         this.organizationClient = organizationClient;
     }
 
-
+    @CircuitBreaker(name = "licensingService")
     public List<License> getLicensings() throws TimeoutException {
         randomlyRunLong();
         return licenseRepository.findAll();
