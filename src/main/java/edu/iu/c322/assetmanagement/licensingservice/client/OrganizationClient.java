@@ -1,6 +1,7 @@
 package edu.iu.c322.assetmanagement.licensingservice.client;
 
 import edu.iu.c322.assetmanagement.licensingservice.model.Organization;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ public class OrganizationClient {
         this.restTemplate = restTemplate;
     }
 
+    @CircuitBreaker(name = "licensingService")
     public Optional<Organization> getOrganization(int organizationId){
         ResponseEntity<Organization> restExchange =
                 restTemplate.exchange(
